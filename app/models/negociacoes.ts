@@ -1,6 +1,7 @@
 import { Negociacao } from "./negociacao.js";
 
 export class Negociacoes{
+    //a lista negociacoes so podera receber uma negociacao
     private negociacoes: Array<Negociacao> = [];
 
     //metodo para adicionar negociacoe na lista
@@ -9,7 +10,7 @@ export class Negociacoes{
     }
 
     //metodo para retornar a lista de negociacoes
-    lista():Array<Negociacao>{
-        return [...this.negociacoes];
+    lista(): ReadonlyArray<Negociacao>{
+        return this.negociacoes;
     }
 }
