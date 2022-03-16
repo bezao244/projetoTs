@@ -1,5 +1,6 @@
 export class Negociacoes {
     constructor() {
+        //a lista negociacoes so podera receber uma negociacao
         this.negociacoes = [];
     }
     //metodo para adicionar negociacoe na lista
