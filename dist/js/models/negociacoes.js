@@ -8,6 +8,6 @@ export class Negociacoes {
     }
     //metodo para retornar a lista de negociacoes
     lista() {
-        return [...this.negociacoes];
+        return this.negociacoes;
     }
 }
