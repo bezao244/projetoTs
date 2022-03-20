@@ -3,14 +3,9 @@ import { View } from "./view.js";
 export class MensagemView extends View<string> {
 
     //criando template para mensagem de conclusao com exito
-    template(model: string): string{
+    protected template(model: string): string{
         return `
             <p class="alert alert-info">${model}</p>
         `;
-    }
-
-    update(model: string): void{
-        const template = this.template(model);
-        this.elemento.innerHTML = template;
     }
 }

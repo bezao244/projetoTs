@@ -18,11 +18,9 @@ export class NegociacaoController {
         const negociacao = this.criaNegociacao();
         //adicionando a negociacao na lista
         this.negociacoes.adiciona(negociacao);
-        //dando update na view cada vez q for adicionado uma nova negociacao
-        this.negociacoesView.update(this.negociacoes);
-        //mostrando mensagem que a negociacao foi adicionada
-        this.mensagemView.update('Negociação adicionada com sucesso!');
         this.limparFormulario();
+        //atualizando as view da página 
+        this.atualizaView();
     }
     //metodo para criar a negociacao
     criaNegociacao() {
@@ -40,5 +38,12 @@ export class NegociacaoController {
         this.inputQuantidade.value = '';
         this.inputValor.value = '';
         this.inputData.focus();
+    }
+    //criando um metodo para atualizar a view na página
+    atualizaView() {
+        //dando update na view cada vez q for adicionado uma nova negociacao
+        this.negociacoesView.update(this.negociacoes);
+        //mostrando mensagem que a negociacao foi adicionada
+        this.mensagemView.update('Negociação adicionada com sucesso!');
     }
 }

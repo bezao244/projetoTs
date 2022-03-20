@@ -1,16 +1,17 @@
 //criando a classe view para ser reultilizado nas outras views criadas
-export class View<T>{
+export abstract class View<T>{
 
     protected elemento: HTMLElement;
+    //na hora de instanciar a classe passará o elemento HTML que será ultilizado
     constructor(seletor: string){
         this.elemento = document.querySelector(seletor);
     }
 
-    update(model: T): void{
+    //criando um metodo para fazer o update das view cada vez q for adicionado uma nova negociacao
+    public update(model: T): void{
         const template = this.template(model);
         this.elemento.innerHTML = template;
     }
-    template(model: T): string{
-        throw Error("Classe filha precisa implementar o método template!");
-    }
+    //tornando obrigatorio qnd vc cria uma nova view ter um template
+    protected abstract template(model: T): string;
 }
