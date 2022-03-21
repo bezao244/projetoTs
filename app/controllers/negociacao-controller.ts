@@ -3,7 +3,7 @@ import { Negociacoes } from "../models/negociacoes.js";
 import { MensagemView } from "../views/mensagem-view.js";
 import { NegociacoesView } from "../views/negociacoes-view.js";
 
-export class NegociacaoController{
+export class NegociacaoController {
     private inputData: HTMLInputElement;
     private inputQuantidade: HTMLInputElement;
     private inputValor: HTMLInputElement;
@@ -11,7 +11,7 @@ export class NegociacaoController{
     private negociacoesView = new NegociacoesView("#negociacoesview");
     private mensagemView = new MensagemView("#mensagemView");
     //contruindo nossa classe com os inputs
-    constructor(){
+    constructor() {
         this.inputData = document.querySelector('#data');
         this.inputQuantidade = document.querySelector('#quantidade');
         this.inputValor = document.querySelector('#valor');
@@ -20,16 +20,23 @@ export class NegociacaoController{
 
     //metodo para adicionar a negociacao criada
     public adiciona(): void {
-        const negociacao =this.criaNegociacao();
-
+        const negociacao = this.criaNegociacao();
+        if (!this.ehDiaUtil(negociacao.data)) {
+            //se n for em dia util irá mostrar na tela:
+            this.mensagemView.update('Apenas negociacoes em dias úteis!');
+            return;
+        }
         //adicionando a negociacao na lista
         this.negociacoes.adiciona(negociacao);
-        
+
         this.limparFormulario();
         //atualizando as view da página 
         this.atualizaView();
     }
-
+    //criando um metodo para verificar se a negociacao é em dia util
+    private ehDiaUtil(data: Date) {
+        return data.getDay() > 0 && data.getDay() < 6;
+    }
     //metodo para criar a negociacao
     private criaNegociacao(): Negociacao {
         const exp = /-/g;
@@ -43,15 +50,15 @@ export class NegociacaoController{
     }
 
     //metodo para limpar formulario apos adicao de negociacao
-    private limparFormulario(): void{
+    private limparFormulario(): void {
         this.inputData.value = '';
         this.inputQuantidade.value = '';
-        this.inputValor.value = ''; 
+        this.inputValor.value = '';
         this.inputData.focus();
     }
 
     //criando um metodo para atualizar a view na página
-    private atualizaView(): void{
+    private atualizaView(): void {
         //dando update na view cada vez q for adicionado uma nova negociacao
         this.negociacoesView.update(this.negociacoes);
 

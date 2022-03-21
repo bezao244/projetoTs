@@ -16,11 +16,20 @@ export class NegociacaoController {
     //metodo para adicionar a negociacao criada
     adiciona() {
         const negociacao = this.criaNegociacao();
+        if (!this.ehDiaUtil(negociacao.data)) {
+            //se n for em dia util irá mostrar na tela:
+            this.mensagemView.update('Apenas negociacoes em dias úteis!');
+            return;
+        }
         //adicionando a negociacao na lista
         this.negociacoes.adiciona(negociacao);
         this.limparFormulario();
         //atualizando as view da página 
         this.atualizaView();
+    }
+    //criando um metodo para verificar se a negociacao é em dia util
+    ehDiaUtil(data) {
+        return data.getDay() > 0 && data.getDay() < 6;
     }
     //metodo para criar a negociacao
     criaNegociacao() {
